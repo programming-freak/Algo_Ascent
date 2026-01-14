@@ -1,1 +1,50 @@
+I tried the other problems, but they were very hard for me, for some I even couldn't find an approach to solve. I want to request the mentors to provide us resources
+regarding them, or tell us how to think about the approaches behind them, like in the first problem, I don't know how to proceed with the information given in the 
+problem about the indices of the segment and the bitwise OR of all the elements of the segement, I do not know how to think of a good way to construct the sequence
+from the given information in a time efficient way.
 
+For the problem of "Difference of Squares", that was the only question I was able to solve in the first go, and that code I have given in the separate file.
+
+For the problem of "PrimeFactorPrime", I thought of an approach and I wrote the code, but the Time Limit Exceeded on few test cases, I am giving that code below, but 
+I do not know how to omptimise it:
+// THE CODE FOR PRIMEFACTORPRIME :-
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int count_prime_fact(long long n){
+    int res = 0;
+    for(long long i = 2; i*i <= n; i++){
+        while(n % i == 0){
+            n /= i;
+            res++;
+        }
+        if(n == 1) break;
+    }
+    if(n>1) res++;
+    return res;
+}
+
+int main(){
+    long long l, r;
+    cin>>l>>r;
+    vector<bool> v(r+1, true);
+    v[0] = v[1] = false;
+    for(long long i = 2; i*i<=r; i++){
+        if(v[i]){
+            for(int j = i*i; j<=r; j+=i) v[j] = false;
+        }
+    }
+    long long ans = 0;
+    for(long long i = l; i<=r; i++){
+        if(v[i]) continue;
+        else{
+            int count = count_prime_fact(i);
+            if(v[count]) ans++;
+        }
+    }
+
+    cout<<ans;
+    return 0;
+}
+  
