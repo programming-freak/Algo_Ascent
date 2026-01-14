@@ -1,1 +1,32 @@
 
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        long long a, b;
+        cin>>a>>b;
+        if(abs(a - b) != 1){
+            cout<<"NO\n";
+            continue;
+        }
+        long long sum = a + b;
+        if(sum < 2){
+            cout << "NO\n";
+            continue;
+        }
+        bool check = true;
+        for(long long i = 2; i * i <= sum; i++){
+            if(sum % i == 0){
+                check = false;
+                break;
+            }
+        }
+        if(check) cout<<"YES"<<'\n';
+        else cout<<"NO"<<'\n';
+    }
+    return 0;
+}
